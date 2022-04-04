@@ -32,12 +32,12 @@ void	SigSend(int *array,	int pid)
 		if (array[i] == 0)
 		{
 			kill(pid, SIGUSR1);
-			usleep(100);
+			usleep(654);
 		}
 		else if (array[i] == 1)
 		{
 			kill(pid, SIGUSR2);
-			usleep(100);
+			usleep(654);
 		}
 		i++;
 	}

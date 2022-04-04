@@ -5,6 +5,8 @@
 
 int i = 0;
 
+
+
 void	receive_str(int sinal)
 {
 	char	*str;
@@ -21,7 +23,7 @@ void	receive_str(int sinal)
 	}
 	if (i == 8)
 	{
-		str[i++] = '\0';
+		str[i] = '\0';
 		printf("%s\n", str);
 		i = 0;
 	}
