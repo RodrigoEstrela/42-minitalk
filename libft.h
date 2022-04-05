@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:46:29 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/04 12:54:22 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:07:32 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_print_
+{
+	va_list	args;
+	int		lentot;
+}					t_print;
 
 long long	ft_atoi(const char *str);
 
@@ -93,10 +99,6 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 char		*ft_strrchr(const char *s, int c);
 
-void		ft_puthex(int nbr, char *base);
-
-void		ft_putptr(void *ptr);
-
 t_list		*ft_lstnew(void *content);
 
 void		ft_lstadd_front(t_list **lst, t_list *new);
@@ -118,5 +120,23 @@ void		ft_putunbr_fd(unsigned int nb, int fd);
 int			ft_recursive_power(int nb, int power);
 
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+void		ft_putstr(t_print *tab);
+
+void		ft_putchar(t_print *tab);
+
+void		ft_puthex(t_print *tab, char formater);
+
+char		*ft_strupcase(char *str);
+
+void		ft_putptr(t_print *tab);
+
+void		ft_putsigned(t_print *tab);
+
+void		ft_putunsigned(t_print *tab);
+
+char		*ft_uitoa(unsigned int c);
+
+int			ft_printf(const char *str, ...);
 
 #endif

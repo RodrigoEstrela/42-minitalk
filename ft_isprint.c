@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_power.c                               :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 15:16:25 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/04 15:16:57 by rdas-nev         ###   ########.fr       */
+/*   Created: 2022/02/15 12:36:31 by rdas-nev          #+#    #+#             */
+/*   Updated: 2022/04/05 11:46:51 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-int	ft_recursive_power(int nb, int power)
+int	ft_isprint(int c)
 {
-	if (power < 0)
-		return (0);
-	else if (power == 0)
-		return (1);
-	else
-		return (nb * ft_recursive_power(nb, power - 1));
+	if ((c >= 32) && (c <= 126))
+		return (c);
+	return (0);
 }

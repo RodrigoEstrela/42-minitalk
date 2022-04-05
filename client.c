@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 15:06:41 by rdas-nev          #+#    #+#             */
+/*   Updated: 2022/04/05 17:28:17 by rdas-nev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stdio.h>
 #include<signal.h>
 #include<unistd.h>
@@ -6,53 +18,67 @@
 
 int	*binvert(int c)
 {
-	int *arrayBin;
-	int i = 7;
-	arrayBin = malloc(8*sizeof(int));
+	int	*array_bin;
+	int	i;
 
-	while((c) != 0)
+	i = 7;
+	array_bin = malloc(8 * sizeof(int));
+	while (c != 0)
 	{
-		arrayBin[i] = c % 2;
+		array_bin[i] = c % 2;
 		c /= 2;
 		i--;
 	}
-	while(i >= 0)
-		arrayBin[i--] = 0;
-	
-	for (i=0; i<8; i++)
-		printf("%d", arrayBin[i]);
-	return(arrayBin);
+	while (i >= 0)
+		array_bin[i--] = 0;
+	return (array_bin);
 }
 
-void	SigSend(int *array,	int pid)
+void	sig_send(int *array,	int pid)
 {
-	int	i = 0;
-	while(i<8)
+	int	i;
+
+	i = 0;
+	while (i < 8)
 	{
 		if (array[i] == 0)
 		{
 			kill(pid, SIGUSR1);
-			usleep(654);
+			usleep(80);
 		}
 		else if (array[i] == 1)
 		{
 			kill(pid, SIGUSR2);
-			usleep(654);
+			usleep(80);
 		}
 		i++;
 	}
 	free(array);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int pid = atoi(av[1]);
-	int	i=0;
-	while(av[2][i] != '\0')
+	int	pid;
+	int	i;
+	int	input;
+
+	if (ac != 3)
 	{
-		int input = ft_isalnum((int)(av[2][i]));
-		SigSend(binvert(input), pid);
-		printf(" ");
+		ft_printf("\e[1;3;31m[Server pid] and [Input string] Required! 👎\n");
+		return (0);
+	}
+	pid = ft_atoi(av[1]);
+	i = 0;
+	while (av[2][i] != '\0')
+	{
+		input = ft_isprint((int)(av[2][i]));
+		sig_send(binvert(input), pid);
 		i++;
+	}
+	i = 0;
+	while (i++ < 8)
+	{
+		kill(pid, SIGUSR2);
+		usleep(80);
 	}
 }
